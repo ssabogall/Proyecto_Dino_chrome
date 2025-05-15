@@ -1,0 +1,132 @@
+function Main.main 5
+call Dino.new 0
+pop local 0
+call Terreno.new 0
+pop local 1
+call Cactus.new 0
+pop local 2
+push local 1
+call Terreno.terraformar 1
+pop temp 0
+push constant 0
+not
+pop local 4
+push local 2
+call Cactus.dibujarCactus 1
+pop temp 0
+push local 0
+call Dino.draw 1
+pop temp 0
+label WHILE_EXP0
+push local 4
+not
+if-goto WHILE_END0
+call Keyboard.keyPressed 0
+pop local 3
+push local 3
+push constant 32
+eq
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push local 0
+call Dino.tocaSuelo 1
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push local 0
+call Dino.borrar 1
+pop temp 0
+push local 0
+push constant 1
+call Dino.jump 2
+pop temp 0
+push local 0
+call Dino.draw 1
+pop temp 0
+label IF_FALSE1
+label IF_FALSE0
+push local 3
+push constant 83
+eq
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push local 0
+call Dino.duck 1
+pop temp 0
+label IF_FALSE2
+push local 0
+call Dino.borrar 1
+pop temp 0
+push local 2
+call Cactus.borrarCactus 1
+pop temp 0
+push local 0
+call Dino.update 1
+pop temp 0
+push local 2
+call Cactus.moverCactus 1
+pop temp 0
+push local 2
+call Cactus.dibujarCactus 1
+pop temp 0
+push local 0
+call Dino.draw 1
+pop temp 0
+push local 0
+push local 2
+call Dino.isHit 2
+if-goto IF_TRUE3
+goto IF_FALSE3
+label IF_TRUE3
+call Screen.clearScreen 0
+pop temp 0
+push constant 10
+call String.new 1
+push constant 71
+call String.appendChar 2
+push constant 97
+call String.appendChar 2
+push constant 109
+call String.appendChar 2
+push constant 101
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 79
+call String.appendChar 2
+push constant 118
+call String.appendChar 2
+push constant 101
+call String.appendChar 2
+push constant 114
+call String.appendChar 2
+push constant 33
+call String.appendChar 2
+call Sys.println 1
+pop temp 0
+push constant 0
+pop local 4
+label IF_FALSE3
+push local 2
+call Cactus.getX 1
+push constant 0
+lt
+if-goto IF_TRUE4
+goto IF_FALSE4
+label IF_TRUE4
+push local 2
+call Cactus.borrarCactus 1
+pop temp 0
+push local 2
+call Cactus.reiniciarCactus 1
+pop temp 0
+label IF_FALSE4
+push constant 50
+call Sys.wait 1
+pop temp 0
+goto WHILE_EXP0
+label WHILE_END0
+push constant 0
+return

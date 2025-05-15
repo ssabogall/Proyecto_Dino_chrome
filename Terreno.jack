@@ -1,0 +1,19 @@
+class Terreno {
+
+    field int y;
+
+
+    constructor Terreno new(){
+        let y = 200;
+        return this;
+    }
+
+
+    method void terraformar(){
+        do Screen.setColor(true);
+        do Screen.drawLine(0, 200 , 510, 200);
+        return;
+    }
+
+   
+}

@@ -1,0 +1,245 @@
+class Dino {
+    // Campos (atributos)
+    field int x, y;      // Posición del dinosaurio
+    field boolean jumping; // ¿Está saltando?
+    field int jumpHeight;  // Altura máxima del salto
+    field int gravity;     // Gravedad (para caída)
+    field int DINO_WIDTH;  // Ancho del dinosaurio
+    field int DINO_HEIGHT; // Alto del dinosaurio
+
+    // Constructor
+    constructor Dino new() {
+        let x = 50;          // Posición X fija
+        let y = 180;         // Posición Y inicial (suelo)
+        let jumping = false;
+        let jumpHeight = -2; // Altura del salto
+        let gravity = 5;      // Velocidad de caída
+        let DINO_WIDTH = 20;  // Ancho del dinosaurio
+        let DINO_HEIGHT = 40; // Alto del dinosaurio
+        return this;         // Retorna la instancia
+    }
+
+    // Método: Saltar (si no está ya saltando)''
+    method void jump(int z) {
+
+        let jumping = true;
+        let y = y + (jumpHeight*z);  // Multiplica primero, luego divide.
+
+        return;
+    }
+
+
+    // Método: Agacharse (simplificado: baja temporalmente)
+    method void duck() {
+        if (~jumping) {  // Solo si no está en el aire
+            let y = y + 20; // Baja ligeramente
+            do Sys.wait(100); // Espera un momento
+            let y = y - 20; // Vuelve a la posición original
+        }
+        return;
+    }
+
+    // Método: Actualizar posición (gravedad)
+    method void update() {
+        if (jumping) {
+
+            let y = y + gravity; // Aplica gravedad
+            if (y > 180) {     // Si toca el suelo
+                let y = 180;
+                let jumping = false;
+            }
+
+        }
+        return;
+    }
+
+    // Método: Dibujar el dinosaurio (simplificado)
+    method void draw() {
+        var int rightBorder;
+        var int memAddress;
+        let memAddress = 16384 + Utility.xyToScreenMap(x, y - 15);
+        if ((memAddress > 16383) & (memAddress < 24576)) { 
+            // column 0
+             do Memory.poke(memAddress, 2048);
+            do Memory.poke(memAddress + 32, 15360);
+            do Memory.poke(memAddress + 64, 32256);
+            do Memory.poke(memAddress + 96, -256);
+            do Memory.poke(memAddress + 128, -256);
+            do Memory.poke(memAddress + 160, -128);
+            do Memory.poke(memAddress + 192, -64);
+            do Memory.poke(memAddress + 224, -64);
+            do Memory.poke(memAddress + 256, 16352);
+            do Memory.poke(memAddress + 288, 8160);
+            do Memory.poke(memAddress + 320, 8176);
+            do Memory.poke(memAddress + 352, 8177);
+            do Memory.poke(memAddress + 384, -16393);
+            do Memory.poke(memAddress + 416, -1);
+            do Memory.poke(memAddress + 448, -1);
+            do Memory.poke(memAddress + 480, -1);
+            do Memory.poke(memAddress + 512, -1);
+            do Memory.poke(memAddress + 544, -1);
+            do Memory.poke(memAddress + 576, -8);
+            do Memory.poke(memAddress + 608, -8);
+            do Memory.poke(memAddress + 640, -8);
+            do Memory.poke(memAddress + 672, -16);
+            do Memory.poke(memAddress + 704, -32);
+            do Memory.poke(memAddress + 736, -32);
+            do Memory.poke(memAddress + 768, -64);
+            do Memory.poke(memAddress + 800, -16512);
+            do Memory.poke(memAddress + 832, 8064);
+            do Memory.poke(memAddress + 864, 3840);
+            do Memory.poke(memAddress + 896, 7680);
+            do Memory.poke(memAddress + 928, 7680);
+            do Memory.poke(memAddress + 960, 7680); // línea extra añadida
+            do Memory.poke(memAddress + 992, 7680);
+            do Memory.poke(memAddress + 1024, 7680);
+            do Memory.poke(memAddress + 1056, 7680);
+            do Memory.poke(memAddress + 1088, 7680);
+
+            // columna 1
+            do Memory.poke(memAddress + 97, 3);
+            do Memory.poke(memAddress + 129, 15);
+            do Memory.poke(memAddress + 161, 15);
+            do Memory.poke(memAddress + 193, 63);
+            do Memory.poke(memAddress + 225, 127);
+            do Memory.poke(memAddress + 257, 243);
+            do Memory.poke(memAddress + 289, 243);
+            do Memory.poke(memAddress + 321, 995);
+            do Memory.poke(memAddress + 353, 1571);
+            do Memory.poke(memAddress + 385, 1571);
+            do Memory.poke(memAddress + 417, 1663);
+            do Memory.poke(memAddress + 449, 895);
+            do Memory.poke(memAddress + 481, 511);
+            do Memory.poke(memAddress + 513, 63);
+            do Memory.poke(memAddress + 545, 63);
+            do Memory.poke(memAddress + 577, 31);
+            do Memory.poke(memAddress + 609, 31);
+            do Memory.poke(memAddress + 641, 31);
+            do Memory.poke(memAddress + 673, 31);
+            do Memory.poke(memAddress + 705, 31);
+            do Memory.poke(memAddress + 737, 15);
+            do Memory.poke(memAddress + 769, 7);
+            do Memory.poke(memAddress + 801, 7);
+            do Memory.poke(memAddress + 833, 15);
+            do Memory.poke(memAddress + 865, 15);
+            do Memory.poke(memAddress + 897, 31);
+            do Memory.poke(memAddress + 929, 62);
+            do Memory.poke(memAddress + 961, 62);
+            do Memory.poke(memAddress + 993, 62);
+            do Memory.poke(memAddress + 1025, 62);
+            do Memory.poke(memAddress + 1057, 62);
+            do Memory.poke(memAddress + 1089, 62);
+        }
+        return;
+    }
+
+    method void borrar(){
+        var int rightBorder;
+        var int memAddress;
+        let memAddress = 16384 + Utility.xyToScreenMap(x, y - 15);
+        if ((memAddress > 16383) & (memAddress < 24576)) {
+            do Screen.setColor(false);
+            do Memory.poke(memAddress, 0);
+            do Memory.poke(memAddress + 32, 0);
+            do Memory.poke(memAddress + 64, 0);
+            do Memory.poke(memAddress + 96, 0);
+            do Memory.poke(memAddress + 128, 0);
+            do Memory.poke(memAddress + 160, 0);
+            do Memory.poke(memAddress + 192, 0);
+            do Memory.poke(memAddress + 224, 0);
+            do Memory.poke(memAddress + 256, 0);
+            do Memory.poke(memAddress + 288, 0);
+            do Memory.poke(memAddress + 320, 0);
+            do Memory.poke(memAddress + 352, 0);
+            do Memory.poke(memAddress + 384, 0);
+            do Memory.poke(memAddress + 416, 0);
+            do Memory.poke(memAddress + 448, 0);
+            do Memory.poke(memAddress + 480, 0);
+            do Memory.poke(memAddress + 512, 0);
+            do Memory.poke(memAddress + 544, 0);
+            do Memory.poke(memAddress + 576, 0);
+            do Memory.poke(memAddress + 608, 0);
+            do Memory.poke(memAddress + 640, 0);
+            do Memory.poke(memAddress + 672, 0);
+            do Memory.poke(memAddress + 704, 0);
+            do Memory.poke(memAddress + 736, 0);
+            do Memory.poke(memAddress + 768, 0);
+            do Memory.poke(memAddress + 800, 0);
+            do Memory.poke(memAddress + 832, 0);
+            do Memory.poke(memAddress + 864, 0);
+            do Memory.poke(memAddress + 896, 0);
+            do Memory.poke(memAddress + 928, 0);
+            do Memory.poke(memAddress + 960, 0); // línea extra añadida
+            do Memory.poke(memAddress + 992, 0);
+            do Memory.poke(memAddress + 1024, 0);
+            do Memory.poke(memAddress + 1056, 0);
+            do Memory.poke(memAddress + 1088, 0);
+
+            // columna 1: borra con 0
+            do Memory.poke(memAddress + 97, 0);
+            do Memory.poke(memAddress + 129, 0);
+            do Memory.poke(memAddress + 161, 0);
+            do Memory.poke(memAddress + 193, 0);
+            do Memory.poke(memAddress + 225, 0);
+            do Memory.poke(memAddress + 257, 0);
+            do Memory.poke(memAddress + 289, 0);
+            do Memory.poke(memAddress + 321, 0);
+            do Memory.poke(memAddress + 353, 0);
+            do Memory.poke(memAddress + 385, 0);
+            do Memory.poke(memAddress + 417, 0);
+            do Memory.poke(memAddress + 449, 0);
+            do Memory.poke(memAddress + 481, 0);
+            do Memory.poke(memAddress + 513, 0);
+            do Memory.poke(memAddress + 545, 0);
+            do Memory.poke(memAddress + 577, 0);
+            do Memory.poke(memAddress + 609, 0);
+            do Memory.poke(memAddress + 641, 0);
+            do Memory.poke(memAddress + 673, 0);
+            do Memory.poke(memAddress + 705, 0);
+            do Memory.poke(memAddress + 737, 0);
+            do Memory.poke(memAddress + 769, 0);
+            do Memory.poke(memAddress + 801, 0);
+            do Memory.poke(memAddress + 833, 0);
+            do Memory.poke(memAddress + 865, 0);
+            do Memory.poke(memAddress + 897, 0);
+            do Memory.poke(memAddress + 929, 0);
+            do Memory.poke(memAddress + 961, 0);
+            do Memory.poke(memAddress + 993, 0);
+            do Memory.poke(memAddress + 1025, 0);
+            do Memory.poke(memAddress + 1057, 0);
+            do Memory.poke(memAddress + 1089, 0);
+
+        }
+        return;
+    }
+
+    method boolean tocaSuelo(){
+        if (y = 180){
+            return true;
+        }
+
+        return false;
+    }
+       method boolean isHit(Cactus c) {
+        var boolean hit;
+        var int cactusX;
+        var int cactusY;
+        var int cactusWidth;
+        var int cactusHeight;
+    
+        let hit = false;
+        let cactusX = c.getX();
+        let cactusY = c.getY();
+        let cactusWidth = c.getWidth();
+        let cactusHeight = c.getHeight();
+    
+        if ((x < (cactusX + cactusWidth)) &
+            ((x + DINO_WIDTH) > cactusX) &
+            (y < (cactusY + cactusHeight)) &
+            ((y + DINO_HEIGHT) > cactusY)) {
+            let hit = true;
+        }
+    
+        return hit;
+    }
+}
