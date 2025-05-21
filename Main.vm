@@ -1,6 +1,9 @@
-function Main.main 5
+function Main.main 6
 call Dino.new 0
 pop local 0
+push constant 0
+not
+pop local 5
 call Terreno.new 0
 pop local 1
 call Cactus.new 0
@@ -29,8 +32,7 @@ eq
 if-goto IF_TRUE0
 goto IF_FALSE0
 label IF_TRUE0
-push local 0
-call Dino.tocaSuelo 1
+push local 5
 if-goto IF_TRUE1
 goto IF_FALSE1
 label IF_TRUE1
@@ -44,7 +46,106 @@ pop temp 0
 push local 0
 call Dino.draw 1
 pop temp 0
+push constant 50
+call Sys.wait 1
+pop temp 0
+push local 0
+call Dino.borrar 1
+pop temp 0
+push local 2
+call Cactus.borrarCactus 1
+pop temp 0
+push local 2
+call Cactus.moverCactus 1
+pop temp 0
+push local 2
+call Cactus.dibujarCactus 1
+pop temp 0
+push local 0
+push constant 3
+call Dino.jump 2
+pop temp 0
+push local 0
+call Dino.draw 1
+pop temp 0
+push constant 50
+call Sys.wait 1
+pop temp 0
+push local 0
+call Dino.borrar 1
+pop temp 0
+push local 2
+call Cactus.borrarCactus 1
+pop temp 0
+push local 2
+call Cactus.moverCactus 1
+pop temp 0
+push local 2
+call Cactus.dibujarCactus 1
+pop temp 0
+push local 0
+push constant 5
+call Dino.jump 2
+pop temp 0
+push local 0
+call Dino.draw 1
+pop temp 0
+push constant 50
+call Sys.wait 1
+pop temp 0
+push local 0
+call Dino.borrar 1
+pop temp 0
+push local 2
+call Cactus.borrarCactus 1
+pop temp 0
+push local 2
+call Cactus.moverCactus 1
+pop temp 0
+push local 2
+call Cactus.dibujarCactus 1
+pop temp 0
+push local 0
+push constant 7
+call Dino.jump 2
+pop temp 0
+push local 0
+call Dino.draw 1
+pop temp 0
+push constant 50
+call Sys.wait 1
+pop temp 0
+push local 0
+call Dino.borrar 1
+pop temp 0
+push local 2
+call Cactus.borrarCactus 1
+pop temp 0
+push local 2
+call Cactus.moverCactus 1
+pop temp 0
+push local 2
+call Cactus.dibujarCactus 1
+pop temp 0
+push local 0
+push constant 10
+call Dino.jump 2
+pop temp 0
+push local 0
+call Dino.draw 1
+pop temp 0
+push constant 50
+call Sys.wait 1
+pop temp 0
+push local 0
+call Dino.borrar 1
+pop temp 0
 label IF_FALSE1
+push constant 0
+pop local 5
+push local 0
+call Dino.tocaSuelo 1
+pop local 5
 label IF_FALSE0
 push local 3
 push constant 83
@@ -111,7 +212,7 @@ pop local 4
 label IF_FALSE3
 push local 2
 call Cactus.getX 1
-push constant 0
+push constant 30
 lt
 if-goto IF_TRUE4
 goto IF_FALSE4

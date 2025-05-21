@@ -1,23 +1,30 @@
-/*
 class Main {
     function void main() {
         var Dino dino;
         var Terreno piso;
-        var char key;
-        var boolean acceso;
         var Cactus cactus;
+        var char key;
         
-        let acceso = true;
-        let dino = Dino.new(); // Crea el dinosaurio
-        do piso.terraformar();
+        var boolean juegoActivo;
+        var boolean acceso;
 
+        let dino = Dino.new();
+        let acceso = true;
+        let piso = Terreno.new();
         let cactus = Cactus.new();
 
-        // Bucle principal del juego
-        while (true) {
-            let key = Keyboard.keyPressed(); // Detecta tecla presionada
-            
-            // Lógica de entrada
+        do piso.terraformar();
+
+        let juegoActivo = true;
+
+        // Dibuja estado inicial
+        do cactus.dibujarCactus();
+        do dino.draw();
+
+        while (juegoActivo) {
+            let key = Keyboard.keyPressed();
+
+            // Entrada
             if (key = 32) {  // Tecla ESPACIO (saltar)
 
                 if (acceso){
@@ -65,67 +72,10 @@ class Main {
                 }
 
                 let acceso = false;
+                let acceso = dino.tocaSuelo();
 
             }
-            if (key = 83) {     // Tecla FLECHA ABAJO (agacharse)
-                do dino.duck();
-            }
-
-            do cactus.borrarCactus();
-            do dino.borrar();
-            
-            do cactus.moverCactus();
-
-            do dino.update();  // Actualiza posición
-
-            do cactus.dibujarCactus();
-            do dino.draw(); // Dibuja dinosaurio 
-            do Sys.wait(50); // Pequeña pausa (control FPS)
-
-            if(cactus.getX() < 30){
-                do cactus.borrarCactus();
-                do cactus.reiniciarCactus();
-            }
-
-            let acceso = dino.tocaSuelo();
-            // do Screen.clearScreen(); // Limpsia pantalla
-        }
-        
-        return;
-    }
-}*/
-
-class Main {
-    function void main() {
-        var Dino dino;
-        var Terreno piso;
-        var Cactus cactus;
-        var char key;
-        var boolean juegoActivo;
-
-        let dino = Dino.new();
-        let piso = Terreno.new();
-        let cactus = Cactus.new();
-
-        do piso.terraformar();
-
-        let juegoActivo = true;
-
-        // Dibuja estado inicial
-        do cactus.dibujarCactus();
-        do dino.draw();
-
-        while (juegoActivo) {
-            let key = Keyboard.keyPressed();
-
-            // Entrada
-            if (key = 32) { // espacio para saltar
-                if (dino.tocaSuelo()) {
-                    do dino.borrar();
-                    do dino.jump(1);
-                    do dino.draw();
-                }
-            }if (key = 83) { // S para agacharse
+            if (key = 83) { // S para agacharse
                 do dino.duck();  
             }
 
@@ -148,7 +98,7 @@ class Main {
             }
 
             // Reiniciar cactus si se sale de pantalla
-            if (cactus.getX() < 0) {
+            if (cactus.getX() < 30) {
                 do cactus.borrarCactus();
                 do cactus.reiniciarCactus();
             }

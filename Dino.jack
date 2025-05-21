@@ -12,7 +12,7 @@ class Dino {
         let x = 50;          // Posición X fija
         let y = 180;         // Posición Y inicial (suelo)
         let jumping = false;
-        let jumpHeight = -2; // Altura del salto
+        let jumpHeight = -3; // Altura del salto
         let gravity = 5;      // Velocidad de caída
         let DINO_WIDTH = 20;  // Ancho del dinosaurio
         let DINO_HEIGHT = 40; // Alto del dinosaurio
@@ -28,6 +28,9 @@ class Dino {
         return;
     }
 
+    method int getX() {
+        return x;
+    }
 
     // Método: Agacharse (simplificado: baja temporalmente)
     method void duck() {
